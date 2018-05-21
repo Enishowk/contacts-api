@@ -3,11 +3,36 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const bodyParser = require("body-parser");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
+const db = require("./models/index");
+
 const app = express();
+const router = express.Router();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.post("/users", (req, res) => {
+  console.log("app", "15", req);
+  db.Users.create({
+    login: req.body.login,
+  })
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+app.use("/api", router);
+
+router.use("/", indexRouter);
+router.use("/", usersRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -19,8 +44,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// CORS
+app.use((req, res, next) => {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // Request methods you wish to allow
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  // Request headers you wish to allow
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, content-type, Authorization, Content-Type");
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  // Pass to next layer of middleware
+  next();
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
