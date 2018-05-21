@@ -5,16 +5,16 @@
   "scripts": {
     "node": "node ./bin/www",
     "start": "nodemon ./bin/www",
-    "db:reset":
-      "./node_modules/.bin/sequelize db:drop && ./node_modules/.bin/sequelize db:create && ./node_modules/.bin/sequelize db:migrate",
-    "db:datafixtures":
-      "npm run db:reset && ./node_modules/.bin/sequelize db:seed:all"
+    "db:reset": "./node_modules/.bin/sequelize db:drop && ./node_modules/.bin/sequelize db:create && ./node_modules/.bin/sequelize db:migrate",
+    "db:datafixtures": "npm run db:reset && ./node_modules/.bin/sequelize db:seed:all"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.2.1",
     "morgan": "~1.9.0",
     "mysql2": "^1.5.3",
     "sequelize": "^4.37.8",
