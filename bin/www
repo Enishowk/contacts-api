@@ -3,11 +3,10 @@
 const app = require("../app");
 const debug = require("debug")("contacts-api:server");
 const http = require("http");
-const config = require("../config/env.js");
 
 const server = http.createServer(app);
 
-const port = normalizePort(config.PORT || "3000");
+const port = normalizePort("3000");
 app.set("port", port);
 
 server.listen(port);

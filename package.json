@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "node": "node ./bin/www",
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "db:reset":
+      "./node_modules/.bin/sequelize db:drop && ./node_modules/.bin/sequelize db:create && ./node_modules/.bin/sequelize db:migrate",
+    "db:datafixtures": "npm run db:reset && ./node_modules/.bin/sequelize db:seed:all"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -15,12 +18,14 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.5.3",
-    "sequelize": "^4.37.8"
+    "sequelize": "^4.37.8",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "sequelize-cli": "^4.0.0"
   }
 }

@@ -5,34 +5,16 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-
-const db = require("./models/index");
+const userRouter = require("./routes/user");
 
 const app = express();
-const router = express.Router();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post("/users", (req, res) => {
-  console.log("app", "15", req);
-  db.Users.create({
-    login: req.body.login,
-  })
-    .then(user => {
-      res.json(user);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
+const router = express.Router();
 
 app.use("/api", router);
-
-router.use("/", indexRouter);
-router.use("/", usersRouter);
+router.use("/user", userRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
