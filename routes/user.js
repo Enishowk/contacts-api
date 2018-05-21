@@ -3,8 +3,17 @@ const db = require("../models/index");
 
 const router = express.Router();
 
-router.get("/login", (req, res) => {
-  res.send("login");
+router.post("/login", (req, res) => {
+  db.User.findOne({
+    where: { username: req.body.username, password: req.body.password },
+    attributes: ["username"],
+  }).then(user => {
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(401).json({ error: "Login ou Password incorrect." });
+    }
+  });
 });
 
 router.post("/register", (req, res) => {
@@ -18,7 +27,7 @@ router.post("/register", (req, res) => {
           password: req.body.password,
         })
           .then(user => {
-            res.json(user);
+            res.status(201).json(user);
           })
           .catch(err => {
             res.status(500).json({ error: err.parent.sqlMessage });
