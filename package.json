@@ -8,7 +8,7 @@
     "db:init":
       "./node_modules/.bin/sequelize db:drop && ./node_modules/.bin/sequelize db:create && ./node_modules/.bin/sequelize db:migrate",
     "db:datafixtures":
-      "npm run db:reset && ./node_modules/.bin/sequelize db:seed:all"
+      "npm run db:init && ./node_modules/.bin/sequelize db:seed:all"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
