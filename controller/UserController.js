@@ -1,9 +1,7 @@
 const { getManager } = require("typeorm");
 const UserSchema = require("../entity/UserSchema");
 const bcrypt = require("bcrypt");
-/**
- * Loads all posts from the database.
- */
+
 const registerUserAction = async (req, res) => {
   const { username, password } = req.body;
 
@@ -23,14 +21,14 @@ const registerUserAction = async (req, res) => {
 
       await userRepository
         .save(user)
-        .then(newUser => res.status(201).json({ newUser: newUser.id }))
+        .then(newUser => res.status(201).json({ newUser: newUser.uuid }))
         .catch(() => res.status(500).json({ error: "Cannot add user." }));
     });
   } else {
     return res.status(409).json({ error: "User already exist." });
   }
-
-  // return res.status(500).json({ error: "Unable to verify user" });
 };
 
-module.exports = registerUserAction;
+module.exports = {
+  registerUserAction,
+};

@@ -5,10 +5,10 @@ module.exports = new EntitySchema({
   name: "User",
   target: User,
   columns: {
-    id: {
+    uuid: {
       primary: true,
-      type: "int",
-      generated: true,
+      generated: "uuid",
+      type: "varchar",
     },
     username: {
       type: "varchar",
