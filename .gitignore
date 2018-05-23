@@ -6,5 +6,4 @@ package-lock.json
 
 # other
 .vscode
-config/config.json
 ormconfig.json
