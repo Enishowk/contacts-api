@@ -14,5 +14,8 @@
     "entitiesDir": "entity",
     "migrationsDir": "migration",
     "subscribersDir": "subscriber"
+  },
+  "jwt": {
+    "secret": "pass"
   }
 }

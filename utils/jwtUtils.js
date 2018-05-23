@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/config.json");
+const config = require("../ormconfig.json");
 
 const generateTokenForUser = userData =>
   jwt.sign(
