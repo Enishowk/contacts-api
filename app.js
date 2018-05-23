@@ -4,7 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { createConnection } = require("typeorm");
-const AppRoutes = require("./routes");
+const UserRoutes = require("./routes/UserRoutes");
 
 const app = express();
 
@@ -35,7 +35,7 @@ createConnection().then(async () => {
     next();
   });
 
-  AppRoutes.forEach(route => {
+  UserRoutes.forEach(route => {
     app[route.method](`/api${route.path}`, (request, response, next) => {
       route
         .action(request, response)
@@ -43,17 +43,6 @@ createConnection().then(async () => {
         .catch(err => next(err));
     });
   });
-
-  // // register routes
-  // router.use("/users", async (req, res) => {
-  //   console.log("app", "31");
-  //   const firstUser = await connection
-  //     .getRepository(User)
-  //     .createQueryBuilder("user")
-  //     .where("user.id = :id", { id: 5 })
-  //     .getOne();
-  //   return res.status(200).json({ message: firstUser });
-  // });
 
   // catch 404 and forward to error handler
   app.use((req, res) => {

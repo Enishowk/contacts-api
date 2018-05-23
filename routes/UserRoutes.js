@@ -1,9 +1,9 @@
 const {
   registerUserAction,
   loginUserAction,
-} = require("./controller/UserController");
+} = require("../controller/UserController");
 
-const AppRoutes = [
+const UserRoutes = [
   {
     path: "/user/register",
     method: "post",
@@ -16,4 +16,4 @@ const AppRoutes = [
   },
 ];
 
-module.exports = AppRoutes;
+module.exports = UserRoutes;
