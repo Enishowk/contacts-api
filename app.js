@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { createConnection } = require("typeorm");
 const UserRoutes = require("./routes/UserRoutes");
+const ContactRoutes = require("./routes/ContactRoutes");
 
 const app = express();
 
@@ -44,9 +45,23 @@ createConnection().then(async () => {
     });
   });
 
+  ContactRoutes.forEach(route => {
+    app[route.method](`/api${route.path}`, (request, response, next) => {
+      route
+        .action(request, response)
+        .then(() => next)
+        .catch(err => next(err));
+    });
+  });
+
   // catch 404 and forward to error handler
   app.use((req, res) => {
     res.status(404).send("404 not found.");
+  });
+
+  app.use((err, req, res) => {
+    console.error("Catch Error", err.stack);
+    res.status(500).json({ error: err.message });
   });
 });
 
