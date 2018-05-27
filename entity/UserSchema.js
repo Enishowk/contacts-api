@@ -1,5 +1,6 @@
 const { EntitySchema } = require("typeorm");
 const { User } = require("../model/User");
+// const { Contact } = require("../model/Contact");
 
 module.exports = new EntitySchema({
   name: "User",
@@ -17,5 +18,10 @@ module.exports = new EntitySchema({
       type: "varchar",
     },
   },
-  relations: {},
+  relations: {
+    contacts: {
+      target: "Contact",
+      type: "one-to-many",
+    },
+  },
 });
