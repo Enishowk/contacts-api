@@ -3,14 +3,11 @@
 ## Installation
 
 * Run `npm i`
-* Rename `config/config.example.json` to `config/config.json` and configure it
-* Run `npm run db:init`
+* Rename `ormconfig.example.json` to `ormconfig.json` and configure it
 
 ## Command
 
 * Start the server : `npm run start`
-* Initialise or reset Database : `npm run db:init`
-* Load Datafixtures : `npm run db:datafixtures` 🔥 It will be drop database
 
 ## Todo
 

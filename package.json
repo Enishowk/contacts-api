@@ -1,6 +1,6 @@
 {
   "name": "contacts-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "node": "node ./bin/www",
@@ -15,7 +15,6 @@
     "morgan": "~1.9.0",
     "mysql2": "^1.5.3",
     "reflect-metadata": "^0.1.10",
-    "sequelize": "^4.37.8",
     "typeorm": "0.2.6",
     "uuid": "^3.2.1"
   },
